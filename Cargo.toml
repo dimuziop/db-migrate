@@ -3,7 +3,7 @@ name = "db-migrate"
 version = "0.1.0"
 edition = "2021"
 description = "Robust database migration tool for ScyllaDB"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Patricio Di Muzio <dimuziop@gmail.com>"]
 
 [[bin]]
 name = "db-migrate"
