@@ -80,7 +80,7 @@ impl ResetCommand {
         // Perform the reset
         match manager.reset_migrations().await {
             Ok(_) => {
-                let mut success_message = vec![
+                let success_message = vec![
                     format!("{} Successfully reset all migrations!", "✅".green().bold()),
                     String::new(),
                     format!("• Removed {} migration record(s)", applied_migrations.len()),

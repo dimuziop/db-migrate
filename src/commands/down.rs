@@ -30,7 +30,7 @@ impl DownCommand {
         }
 
         // Get the most recent migrations to rollback (reverse order)
-        let mut migrations_to_rollback: Vec<_> = applied_migrations
+        let migrations_to_rollback: Vec<_> = applied_migrations
             .into_iter()
             .rev()
             .take(self.count)

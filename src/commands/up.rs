@@ -51,11 +51,6 @@ impl UpCommand {
                     );
                 }
                 Err(e) => {
-                    let error_msg = format!(
-                        "Failed to apply migration {}: {}",
-                        migration.version, e
-                    );
-
                     return Ok(CommandOutput::success_with_data(
                         format!(
                             "{} Applied {} migration(s), failed on: {}",
