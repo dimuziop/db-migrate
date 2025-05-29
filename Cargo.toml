@@ -1,6 +1,6 @@
 [package]
 name = "db-migrate"
-version = "0.1.001"
+version = "0.1.1"
 edition = "2021"
 description = "Robust database migration tool for ScyllaDB"
 authors = ["Patricio Di Muzio <dimuziop@gmail.com>"]
