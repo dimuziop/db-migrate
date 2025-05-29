@@ -8,6 +8,7 @@ use chrono::{TimeZone, Utc};
 use scylla::{Session, SessionBuilder};
 use std::collections::HashMap;
 use std::path::PathBuf;
+use scylla::frame::value::CqlTimestamp;
 use tokio::fs;
 use tracing::{debug, info, warn};
 use walkdir::WalkDir;
@@ -78,7 +79,7 @@ impl MigrationManager {
     /// Get all applied migrations from the database
     pub async fn get_applied_migrations(&self) -> Result<Vec<MigrationRecord>, MigrationError> {
         let query = format!(
-            "SELECT version, applied_at, checksum, description FROM {} ORDER BY version",
+            "SELECT version, applied_at, checksum, description FROM {}",
             self.config.migrations.table_name
         );
 
@@ -86,14 +87,14 @@ impl MigrationManager {
         let mut migrations = Vec::new();
 
         for row in rows
-            .rows_typed::<(String, i64, String, String)>()
+            .rows_typed::<(String, CqlTimestamp, String, String)>()
             .map_err(|e| MigrationError::IntegrityError(e.to_string()))?
         {
             let (version, applied_at_ts, checksum, description) =
                 row.map_err(|e| MigrationError::IntegrityError(e.to_string()))?;
 
             let applied_at = Utc
-                .timestamp_millis_opt(applied_at_ts)
+                .timestamp_millis_opt(applied_at_ts.0)
                 .single()
                 .ok_or_else(|| MigrationError::IntegrityError("Invalid timestamp".into()))?;
 
@@ -271,7 +272,7 @@ impl MigrationManager {
                 query,
                 (
                     &migration.version,
-                    Utc::now().timestamp_millis(),
+                    CqlTimestamp(Utc::now().timestamp_millis()),
                     &migration.checksum,
                     &migration.description,
                 ),
