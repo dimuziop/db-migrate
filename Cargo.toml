@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 description = "Robust database migration tool for ScyllaDB"
 authors = ["Patricio Di Muzio <dimuziop@gmail.com>"]
+license = "MIT OR Apache-2.0"
 
 [[bin]]
 name = "db-migrate"
