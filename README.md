@@ -1,6 +1,7 @@
 # db-migrate - ScyllaDB Migration Tool
 
-A robust, production-ready database migration tool for ScyllaDB/Cassandra written in Rust. This tool provides Rails/Django-style migrations with advanced features like checksum verification, rollback support, and schema drift detection.
+A robust, production-ready database migration tool for ScyllaDB/Cassandra, written in Rust.
+Designed with extensibility in mind, it aims to bring a familiar approach to other databases as well. This tool offers Rails- and Django-style migrations, featuring advanced capabilities like checksum verification, rollback support, and schema drift detection.
 
 ## 🚀 Features
 
